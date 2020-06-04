@@ -2,8 +2,11 @@ pipeline {
   agent {
     docker {
       image 'golang'
-      label 'hey'
+      label 'test-label'
     }
+  }
+  environment {
+    HEY_THERE = 'buddy'
   }
   stages {
     stage('build') {
@@ -15,6 +18,9 @@ pipeline {
       steps {
         sh 'echo hey'
         sh 'echo there'
+        sh 'echo this prints the env variable $HEY_THERE'
+        sh "echo and so does this $HEY_THERE"
+        sh 'printenv'
       }
     }
   }
